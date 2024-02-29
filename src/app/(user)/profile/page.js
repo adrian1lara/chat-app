@@ -1,6 +1,7 @@
 'use client'
 
 import getCurrentUser from "@/app/api/userAuth/currentUser";
+import { Erica_One } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,7 +14,6 @@ export default function Page() {
 
     useEffect(()=> {
         const token  = localStorage.getItem('accessToken')
-
         if(!token) {
             router.push("/log-in")
             return
@@ -34,6 +34,8 @@ export default function Page() {
 
     }, [])
     
+
+    if(error) return <h1>Opps an error occurred</h1>
 
     return (
         <div>
