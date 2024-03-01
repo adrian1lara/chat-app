@@ -1,6 +1,7 @@
+import Dropdown from "./dropdown";
 
 
-export default function UserNav() {
+export default function UserNav({data}) {
 
     return (
         <div className="max-w-screen m-4 ">
@@ -23,6 +24,8 @@ export default function UserNav() {
                         </li>
                     </ul>
                 </div>
+
+                <Dropdown data={data} />
             </nav>
         </div>
     )
