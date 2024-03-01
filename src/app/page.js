@@ -1,8 +1,22 @@
+'use client'
+
 import "./styles/global.css"
 import Image from "next/image";
 import NoUserNav from "./components/noUserNav";
+import { useEffect } from "react";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
+  const token = localStorage.getItem('accessToken')
+
+  useEffect(()=> {
+    if(token) {
+      router.push('/chat')
+    }
+  })
+  
+
   return (
     <div className="w-screen border-2 border-black">
       <header>
