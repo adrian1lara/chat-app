@@ -29,7 +29,7 @@ import { useRouter } from "next/navigation"
             if(res.ok) {
                 const response = await res.text()
                 localStorage.setItem('accessToken', response)
-                router.push("/user")
+                router.push("/chat")
             } else {
                 const dataError = await res.text()
                 setError(dataError)
