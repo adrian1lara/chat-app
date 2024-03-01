@@ -25,8 +25,8 @@ export default function SignUpForm () {
     }
     
     return (
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" onSubmit={handleSubmit}>  
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6" onSubmit={handleSubmit}>  
                 <input type="text" name="username" placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -51,7 +51,7 @@ export default function SignUpForm () {
                 </button>
 
 
-                <p class="mt-10 text-center text-sm text-gray-500">
+                <p className="mt-10 text-center text-sm text-gray-500">
                    Do you have an account?
                     <a href="/log-in" className="font-semibold leading-6 text-fuchsia-400 hover:text-fuchsia-600"> Log In here</a>
                 </p>

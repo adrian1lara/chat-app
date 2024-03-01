@@ -59,7 +59,7 @@ import { useRouter } from "next/navigation"
                 >log in
                 </button>
 
-                <p class="mt-10 text-center text-sm text-gray-500">
+                <p className="mt-10 text-center text-sm text-gray-500">
                    Don't have an account yet?
                     <a href="/sign-up" className="font-semibold leading-6 text-fuchsia-400 hover:text-fuchsia-600"> Sign Up here</a>
                 </p>
