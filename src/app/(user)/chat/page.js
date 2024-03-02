@@ -5,6 +5,7 @@ import UserNav from "@/app/components/userNav";
 import { validateUser } from "@/app/middleware/validateUser";
 import { useRouter } from "next/navigation";
 import getCurrentUser from "@/app/api/userAuth/currentUser";
+import UserChats from "@/app/components/usersChat";
 
 
 export default function ChatPage() {
@@ -37,6 +38,12 @@ export default function ChatPage() {
     return (
         <div>
             <UserNav data={data}/>
+
+            <div>
+                <div>
+                    <UserChats />
+                </div>
+            </div>
         </div>
     )
 }
