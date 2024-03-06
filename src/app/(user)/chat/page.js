@@ -8,6 +8,7 @@ import getCurrentUser from "@/app/api/userAuth/currentUser";
 import UserChats from "@/app/components/usersChat";
 import SearchBar from "@/app/components/search";
 import displayUsers from "@/app/api/displayUsers";
+import UserChat from "@/app/components/chat";
 
 
 export default function ChatPage() {
@@ -60,15 +61,20 @@ export default function ChatPage() {
     return (
         <div>
             <UserNav data={data}/>
-
-            <div>
-                <div>
-                    <SearchBar onSearch={handleSearchFromChat}/>
+            <div className="container max-h-3/5 mx-auto shadow-lg rounded-lg p-2 flex space-x-2">
+                <div className="space-y-2">
+                    <div>
+                        <SearchBar onSearch={handleSearchFromChat}/>
+                    </div>
+                    <div>
+                        <UserChats usernames={searchResults} />
+                    </div>
                 </div>
-                <div>
-                    <UserChats usernames={searchResults} />
+                <div className="w-full">
+                    <UserChat />
                 </div>
             </div>
+            
         </div>
     )
 }
