@@ -7,11 +7,11 @@ export default function UserDisplay({usernames}) {
     return (
         <div>
             {usernames && (
-                <div>
+                <div className="w-md space-y-5">
                     {usernames.map((user) => (
-                        <div key={user._id} className="flex items-center">
+                        <div key={user._id} className="flex items-center border-2 border-slate p-2 max-w-sm rounded-2xl">
                             <UserAvatar  img={user.avatar}/>
-                            <p>{user.username}</p>
+                            <p className="text-xl">{user.username}</p>
                             
                             </div>
                     ))}
