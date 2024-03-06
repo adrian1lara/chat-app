@@ -8,12 +8,14 @@ import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter()
-  const token = localStorage.getItem('accessToken')
+  
 
   useEffect(()=> {
+    const token = localStorage.getItem('accessToken')
     if(token) {
       router.push('/chat')
     }
+
   })
   
 
