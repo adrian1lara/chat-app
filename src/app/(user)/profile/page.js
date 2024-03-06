@@ -34,7 +34,6 @@ export default function Page() {
 
         fetchdata()
   
-        
 
     }, [])
 
@@ -52,7 +51,7 @@ export default function Page() {
             <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-2'>
                 <div className=' flex flex-col items-center justify-center'>   
                     <ProfileAvatar img={data.avatar}/> 
-                    <h3>{data.username}</h3>
+                    <h3 className='text-2xl font-bold text-slate-500'>{data.username}</h3>
 
                     <div>
                     <DeleteButton />
