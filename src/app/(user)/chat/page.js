@@ -6,10 +6,13 @@ import { validateUser } from "@/app/middleware/validateUser";
 import { useRouter } from "next/navigation";
 import getCurrentUser from "@/app/api/userAuth/currentUser";
 import UserChats from "@/app/components/usersChat";
+import SearchBar from "@/app/components/search";
+import displayUsers from "@/app/api/displayUsers";
 
 
 export default function ChatPage() {
     const [data, setData] = useState('')
+    const [searchResults, setSearchResults] = useState([])
 
     const router = useRouter()
 
@@ -31,7 +34,26 @@ export default function ChatPage() {
 
         fetchData()
 
+    
+        displayUsers(setSearchResults)
+
     }, [])
+
+
+    const handleSearchFromChat = async(searchTerm) => {
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/v0/user/search/username?searchTerm=${searchTerm}`)
+
+            if(res.ok) {
+                const resOk = await res.json()
+                setSearchResults(resOk)
+            }
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     if(!data) return <h1>Loading...</h1>
     
@@ -41,7 +63,10 @@ export default function ChatPage() {
 
             <div>
                 <div>
-                    <UserChats />
+                    <SearchBar onSearch={handleSearchFromChat}/>
+                </div>
+                <div>
+                    <UserChats usernames={searchResults} />
                 </div>
             </div>
         </div>
