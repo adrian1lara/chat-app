@@ -61,7 +61,8 @@ export default function ChatPage() {
     return (
         <div>
             <UserNav data={data}/>
-            <div className="container max-h-3/5 mx-auto shadow-lg rounded-lg p-2 flex space-x-2">
+            <div className="container max-h-4/5 mx-auto shadow-lg rounded-lg p-2 flex space-x-2">
+                
                 <div className="space-y-2">
                     <div>
                         <SearchBar onSearch={handleSearchFromChat}/>
