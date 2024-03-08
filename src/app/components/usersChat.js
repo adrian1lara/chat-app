@@ -5,7 +5,7 @@ import UserAvatar from "./avatar";
 export default function UserDisplay({usernames}) {
    
     return (
-        <div>
+        <div className="overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded ">
             {usernames && (
                 <div className="w-md space-y-5">
                     {usernames.map((user) => (
