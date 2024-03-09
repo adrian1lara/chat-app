@@ -1,7 +1,7 @@
 
 import Message from "./message";
 
-export default function UserChat ({ messages, userId }) {
+export default function UserChat ({ messages, userId, token, chatData , sender}) {
     
     //if(!messages) { return "loading..."}
     return (
@@ -11,13 +11,13 @@ export default function UserChat ({ messages, userId }) {
             </div>
             <div className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
             { messages && messages.map((message) => (
-            <div key={message._id} className={`flex justify-${message.sender === userId ? 'end' : 'start'} mb-4`} >
-                <p>{message.content}</p> {/* Render message content */}
+            <div key={message._id} className={`border-2 border-black text-2xl flex ${message.sender == sender ? 'justify-end' : 'justify-start'}`} >
+                <p className="w-fit border-2 border-blue-700">{message.content}</p> {/* Render message content */}
             </div>
             ))}
             </div>
             <div>
-                <Message />
+                <Message chatData={chatData} token={token} />
             </div>
         </div>
     )
