@@ -123,7 +123,7 @@ export default function ChatPage() {
                     </div>
                 </div>
                 <div className="w-full">
-                    <UserChat userId={selectedUser} messages={messages}/>
+                    <UserChat userId={selectedUser} messages={messages} token={auth} chatData={chat} sender={data._id}/>
                 </div>
             </div>
             
