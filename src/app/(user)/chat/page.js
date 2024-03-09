@@ -9,18 +9,25 @@ import UserChats from "@/app/components/usersChat";
 import SearchBar from "@/app/components/search";
 import displayUsers from "@/app/api/displayUsers";
 import UserChat from "@/app/components/chat";
+import createChat from "@/app/api/createChat";
+import getSelectedChat from "@/app/api/getChat";
+import getChatMessages from "@/app/api/getMessages";
 
 
 export default function ChatPage() {
     const [data, setData] = useState('')
     const [searchResults, setSearchResults] = useState([])
+    const [selectedUser, setSelectedUser] = useState(null)
+    const [auth, setAuth] = useState(null)
+    const [chat, setChat] = useState([])
+    const [messages, setMessages] = useState([])
 
     const router = useRouter()
 
     useEffect(() => {
 
         const token = localStorage.getItem('accessToken')
-
+        setAuth(token)
         validateUser(router)
         
         const  fetchData = async () => {
@@ -56,6 +63,50 @@ export default function ChatPage() {
         }
     }
 
+
+    const handleUserSelect = async(clickedUser) => {
+        setSelectedUser(clickedUser)
+
+        const currentUserID = data._id
+        
+        //console.log(auth)
+        // fetch existing chat for the selected user
+        try {
+            const existingChat = await getSelectedChat(clickedUser, auth)
+            //console.log(existingChat) //if I display this, give me the json chat
+            //console.log(existingChat) // if I display this, give me undifined
+            setChat(existingChat)
+
+            if(existingChat) {
+                try {
+                    const currentChat = existingChat[0]
+                    const chatId = currentChat._id
+                    const res = await getChatMessages(chatId, auth)
+
+                    setMessages(res)
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        } catch (error) {
+            console.error(error)
+        }
+
+        
+
+        // if chat dont exists 
+        if(!chat?.length) {
+            try {
+                await createChat(currentUserID, clickedUser)
+    
+            } catch (error) {
+                console.error(error)
+            }
+        }
+       
+    }
+
+
     if(!data) return <h1>Loading...</h1>
     
     return (
@@ -68,11 +119,11 @@ export default function ChatPage() {
                         <SearchBar onSearch={handleSearchFromChat}/>
                     </div>
                     <div>
-                        <UserChats usernames={searchResults} />
+                        <UserChats usernames={searchResults} onUserSelect={handleUserSelect}/>
                     </div>
                 </div>
                 <div className="w-full">
-                    <UserChat />
+                    <UserChat userId={selectedUser} messages={messages}/>
                 </div>
             </div>
             
