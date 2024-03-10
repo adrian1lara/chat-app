@@ -1,16 +1,13 @@
-import { useState } from "react"
-import sendMessage from "../api/sendMessage"
+import { useEffect, useState } from "react"
 
-export default function Message ({chatData, token}) {
+export default function Message ({sendMessage}) {
 
     const [message, setMessage] = useState('')
 
-    const handleSendMessage = async()=> {
-        const chat = chatData[0]
-        const chatId = chat._id
-        console.log(message)
-        await sendMessage(chatId, token, message)
+    const handleSendMessage = () => { 
+        sendMessage(message)
     }
+
 
     return (
         <div className="flex items-center py-2 px-3  rounded-lg ">
