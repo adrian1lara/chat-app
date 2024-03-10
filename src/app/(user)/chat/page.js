@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../../styles/global.css"
 import UserNav from "@/app/components/userNav";
 import { validateUser } from "@/app/middleware/validateUser";
@@ -12,7 +12,7 @@ import UserChat from "@/app/components/chat";
 import createChat from "@/app/api/createChat";
 import getSelectedChat from "@/app/api/getChat";
 import getChatMessages from "@/app/api/getMessages";
-
+import { io } from "socket.io-client";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -23,6 +23,8 @@ export default function ChatPage() {
     const [messages, setMessages] = useState([])
 
     const router = useRouter()
+    const socket = useRef(null)
+
 
     useEffect(() => {
 
@@ -45,6 +47,21 @@ export default function ChatPage() {
     
         displayUsers(setSearchResults)
 
+        if(!socket.current) {
+            try {
+                socket.current = io("http://localhost:3000");
+            } catch (error) {
+                console.error("Socket initialization error:", error);
+            }
+        }
+
+        return () => {
+            // Cleanup function to unsubscribe from events on component unmount
+            if (socket.current) {
+                socket.current.off("new_message");
+            }
+        };
+
     }, [])
 
 
@@ -66,6 +83,7 @@ export default function ChatPage() {
 
     const handleUserSelect = async(clickedUser) => {
         setSelectedUser(clickedUser)
+        socket.current.off("new_message");
 
         const currentUserID = data._id
         
@@ -84,6 +102,15 @@ export default function ChatPage() {
                     const res = await getChatMessages(chatId, auth)
 
                     setMessages(res)
+                    socket.current.on("new_message", (newMessage) => {
+                        // Check if the received message belongs to the current chat room
+                        if(newMessage.chat === chatId) {
+                            setMessages((prevMessages) => [...prevMessages, newMessage]);
+                        }
+                        
+                      });
+            
+
                 } catch (error) {
                     console.error(error)
                 }
