@@ -7,7 +7,7 @@ export default function UserDisplay({usernames, onUserSelect }) {
     
    
     return (
-        <div className="overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded ">
+        <div className="overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded">
             {usernames && (
                 <div className="w-md  space-y-5">
                     {usernames.map((user) => (
