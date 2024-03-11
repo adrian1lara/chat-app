@@ -17,10 +17,10 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
     
     //if(!messages) { return "loading..."}
     return (
-        <div className="px-5 flex flex-col justify-between border-2 h-full">
+        <div className="px-5 flex flex-col justify-between border-2 h-full ">
       {/* ... chat header */}
       <h2>chat with {userId}</h2>
-      <div className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+      <div className="flex flex-col h-full space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
         {messages.length > 0 &&
           messages.map((message, index) => (
            <div key={index} className={`border-2 border-black text-2xl flex ${message.sender == sender ? 'justify-end' : 'justify-start'}`}>
