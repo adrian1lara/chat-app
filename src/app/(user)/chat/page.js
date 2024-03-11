@@ -139,8 +139,8 @@ export default function ChatPage() {
     return (
         <div>
             <UserNav data={data}/>
-            <div className="container max-h-4/5 mx-auto shadow-lg rounded-lg p-2 flex space-x-2">
-                
+            <div className="container mx-auto shadow-lg rounded-lg p-2 flex space-x-2" 
+            style={{height: '600px'}}>
                 <div className="space-y-2">
                     <div>
                         <SearchBar onSearch={handleSearchFromChat}/>
@@ -149,7 +149,7 @@ export default function ChatPage() {
                         <UserChats usernames={searchResults} onUserSelect={handleUserSelect}/>
                     </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full ">
                     <UserChat userId={selectedUser} messages={messages} token={auth} chatData={chat} sender={data._id}/>
                 </div>
             </div>
