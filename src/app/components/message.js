@@ -6,6 +6,7 @@ export default function Message ({sendMessage}) {
 
     const handleSendMessage = () => { 
         sendMessage(message)
+        setMessage('')
     }
 
 
