@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import "../../styles/global.css"
 import UserNav from "@/app/components/userNav";
 import { validateUser } from "@/app/middleware/validateUser";
@@ -13,6 +13,7 @@ import createChat from "@/app/api/createChat";
 import getSelectedChat from "@/app/api/getChat";
 import getChatMessages from "@/app/api/getMessages";
 import { io } from "socket.io-client";
+import Loading from "./loading";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -133,11 +134,10 @@ export default function ChatPage() {
        
     }
 
-
-    if(!data) return <h1>Loading...</h1>
     
     return (
         <div className="h-dvh">
+            <Suspense fallback={<Loading/>}>
             <UserNav data={data}/>
             <div className="container mx-auto shadow-2xl rounded-lg p-2 flex space-x-2 bg-white" 
             style={{maxHeight: "600px"}}
@@ -156,7 +156,8 @@ export default function ChatPage() {
             </div>
             <footer>
             </footer>
-
+            </Suspense>
+            
         </div>
     )
 }
