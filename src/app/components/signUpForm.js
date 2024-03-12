@@ -45,7 +45,7 @@ export default function SignUpForm () {
                     <p className="text-red-500 text-center">{error}</p>
                     )}
                 <button type="submit"
-                className="flex w-full justify-center rounded-md bg-fuchsia-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fuchsia-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 ease-in duration-200 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                     sign up
                 </button>
@@ -53,7 +53,7 @@ export default function SignUpForm () {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                    Do you have an account?
-                    <a href="/log-in" className="font-semibold leading-6 text-fuchsia-400 hover:text-fuchsia-600"> Log In here</a>
+                    <a href="/log-in" className="font-semibold leading-6 ease-in duration-200 text-blue-500 hover:text-blue-600"> Log In here</a>
                 </p>
             </form>
         </div>

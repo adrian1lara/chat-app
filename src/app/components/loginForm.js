@@ -55,13 +55,13 @@ import { useRouter } from "next/navigation"
                 required></input>
                 {error && (<p className="text-red-500 text-center text-sm">{error}</p>)}
                 <button type="submit"
-                className="flex w-full justify-center rounded-md bg-fuchsia-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fuchsia-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm ease-in duration-300  hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >log in
                 </button>
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                    Don't have an account yet?
-                    <a href="/sign-up" className="font-semibold leading-6 text-fuchsia-400 hover:text-fuchsia-600"> Sign Up here</a>
+                    <a href="/sign-up" className="font-semibold leading-6 ease-in duration-200 text-blue-500 hover:text-blue-600"> Sign Up here</a>
                 </p>
             </form>
 
