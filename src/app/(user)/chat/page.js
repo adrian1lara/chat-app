@@ -145,7 +145,7 @@ export default function ChatPage() {
                     <div>
                         <SearchBar onSearch={handleSearchFromChat}/>
                     </div>
-                    <div>
+                    <div> 
                         <UserChats usernames={searchResults} onUserSelect={handleUserSelect}/>
                     </div>
                 </div>
