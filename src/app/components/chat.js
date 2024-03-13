@@ -2,6 +2,7 @@
 import Message from "./message";
 import sendMessage from "../api/sendMessage";
 import { useEffect, useRef, useState } from "react";
+import UserAvatar from "./avatar";
 
 export default function UserChat ({ messages, userId, token, chatData , sender}) {
 
@@ -27,10 +28,11 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
     
     if(!messages) { return "loading..."}
     return (
-        <div className="px-5 flex flex-col justify-between border-2 h-full ">
+        <div className="px-5 flex flex-col justify-between border-2 h-full">
       {/* ... chat header */}
-      <div className="border-b-2 p-4">
-        <h2>chat with <span className="text-blue-700">{userId}</span></h2>
+      <div className="border-b-2 p-4 flex items-center space-x-2">
+        <UserAvatar img={userId?.avatar}/>
+        <h2 className="text-xl">chat with <span className="text-blue-700 capitalize">{userId?.username}</span></h2>
       </div>
       <div className="flex flex-col h-full text-white space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       ref={messageContainerRef}>
