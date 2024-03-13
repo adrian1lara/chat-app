@@ -13,6 +13,7 @@ import createChat from "@/app/api/createChat";
 import getSelectedChat from "@/app/api/getChat";
 import getChatMessages from "@/app/api/getMessages";
 import { io } from "socket.io-client";
+import Footer from "@/app/components/footer";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -90,7 +91,7 @@ export default function ChatPage() {
         //console.log(auth)
         // fetch existing chat for the selected user
         try {
-            const existingChat = await getSelectedChat(clickedUser, auth)
+            const existingChat = await getSelectedChat(clickedUser._id, auth)
             //console.log(existingChat) //if I display this, give me the json chat
             //console.log(existingChat) // if I display this, give me undifined
             setChat(existingChat)
@@ -140,7 +141,7 @@ export default function ChatPage() {
         <div className="h-dvh">
             <UserNav data={data}/>
             <div className="container mx-auto shadow-2xl rounded-lg p-2 flex space-x-2 bg-white" 
-            style={{maxHeight: "600px"}}
+            style={{height: "600px"}}
             >
                 <div className="space-y-2">
                     <div>
@@ -150,13 +151,11 @@ export default function ChatPage() {
                         <UserChats usernames={searchResults} onUserSelect={handleUserSelect}/>
                     </div>
                 </div>
-                <div className="w-full ">
+                <div className="w-full">
                     <UserChat userId={selectedUser} messages={messages} token={auth} chatData={chat} sender={data._id}/>
                 </div>
             </div>
-            <footer>
-            </footer>
-
+            <Footer/>
         </div>
     )
 }
