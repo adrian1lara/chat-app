@@ -20,7 +20,7 @@ export default function UserDisplay({usernames, onUserSelect}) {
                         ${selectedUser === user._id ? 'bg-gray-200' : 'bg-none'}`}
                         onClick={()=>{
                             handleClick(user._id)
-                             onUserSelect(user)}}>
+                            onUserSelect(user)}}>
                             <UserAvatar  img={user.avatar}/>
                             <p className="mx-2 text-xl">{user.username}</p>
                             </div>
