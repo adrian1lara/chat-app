@@ -18,18 +18,16 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
     }, [messages, chatData]);
 
     const handleSendMessage = async(message)=> {
-        const chat = chatData[0]
-        const chatId = chat._id
+        const chatId = chatData[0]._id
 
         console.log(chatId)
         console.log(message)
         await sendMessage(chatId, token, message)
     }
     
-    if(!messages) { return "loading..."}
     return (
+
         <div className="px-5 flex flex-col justify-between border-2 h-full">
-      {/* ... chat header */}
       <div className="border-b-2 p-4 flex items-center space-x-2">
         <UserAvatar img={userId?.avatar}/>
         <h2 className="text-xl">chat with <span className="text-blue-700 capitalize">{userId?.username}</span></h2>
@@ -58,7 +56,9 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
           ))}
       </div>
       <div>
-        <Message sendMessage={handleSendMessage} />
+      {chatData && chatData[0] && (
+         <Message sendMessage={handleSendMessage} />
+        )}
       </div>
     </div>
   );
