@@ -3,7 +3,7 @@
 export default async function getCurrentUser(token) {
 
     try {
-        const res = await fetch("http://localhost:3000/api/v0/user/auth/me", {
+        const res = await fetch("https://chatty-api.fly.dev/api/v0/user/auth/me", {
             headers: {
                 Authorization: `Bearer ${token}`
             }

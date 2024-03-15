@@ -3,7 +3,7 @@
 export default async function createChat(currentUserID, clickedUserID, token) {
 
     try {
-        const res = await fetch("http://localhost:3000/api/v0/chat/new", {
+        const res = await fetch("https://chatty-api.fly.dev/api/v0/chat/new", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

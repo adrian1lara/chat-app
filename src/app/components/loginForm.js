@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation"
 
        try {
 
-            const res = await fetch("http://localhost:3000/api/v0/user/auth/login",  {
+            const res = await fetch("https://chatty-api.fly.dev/api/v0/user/auth/login",  {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

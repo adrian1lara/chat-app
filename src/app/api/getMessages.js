@@ -1,7 +1,7 @@
 
 export default async function getChatMessages (chatId, token) {
     try {
-        const res = await fetch(`http://localhost:3000/api/v0/message/${chatId}/messages`, {
+        const res = await fetch(`https://chatty-api.fly.dev/api/v0/message/${chatId}/messages`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`

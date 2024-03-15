@@ -2,7 +2,7 @@
 
 export default async function userRegistration (username, email, password ) {
     try {
-        const res = await fetch("http://localhost:3000/api/v0/user/new", {
+        const res = await fetch("https://chatty-api.fly.dev/api/v0/user/new", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -2,7 +2,7 @@
 export default async function deleteUserAccount (token, id) {
 
     try {
-        const res = await fetch(`http://localhost:3000/api/v0/user/auth/account/delete/${id}`, {
+        const res = await fetch(`https://chatty-api.fly.dev/api/v0/user/auth/account/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`

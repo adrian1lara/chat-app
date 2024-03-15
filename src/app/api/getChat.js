@@ -1,7 +1,7 @@
 
 export default async function getSelectedChat(clickedUserID, token) {
     try {
-        const res = await fetch(`http://localhost:3000/api/v0/chat/user?userId=${clickedUserID}`, {
+        const res = await fetch(`https://chatty-api.fly.dev/api/v0/chat/user?userId=${clickedUserID}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
