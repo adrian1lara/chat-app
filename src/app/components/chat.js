@@ -9,20 +9,21 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
     const messageContainerRef = useRef(null);
     const [currentChatId, setCurrentChatId] = useState(null);
   
-    useEffect(() => {
+   useEffect(() => {
       // Scroll to the bottom only when messages change or chat changes
-      if (messageContainerRef.current && (messages.length > 0 || currentChatId !== chatData[0]?._id)) {
+      if (messageContainerRef.current && (messages.length > 0 || currentChatId !== chatData)) {
         messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
-        setCurrentChatId(chatData[0]?._id); // Update current chat ID
+        setCurrentChatId(chatData); // Update current chat ID
       }
     }, [messages, chatData]);
 
     const handleSendMessage = async(message)=> {
-        const chatId = chatData[0]._id
+        
+        const chatId = chatData
+        console.log(chatData) 
 
-        console.log(chatId)
-        console.log(message)
         await sendMessage(chatId, token, message)
+        console.log(message, " chat")
     }
     
     return (
@@ -33,30 +34,25 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
         <h2 className="text-xl">chat with <span className="text-blue-700 capitalize">{userId?.username}</span></h2>
       </div>
       <div className="flex flex-col h-full text-white space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
-      ref={messageContainerRef}>
-        {messages.length > 0 &&
-          messages.map((message, index) => (
+      ref={messageContainerRef} >
+        {chatData == currentChatId &&
+          messages.map((message) => (
             
-           <div key={index} className={`text-2xl flex ${message.sender == sender ? 'justify-end ' : 'justify-start'}`}>
-                    <div>
-                        {message.sender != sender ? <UserAvatar img={userId?.avatar} /> : null }
-                    </div>
-                    <div className={`flex flex-col ${ message.sender === sender ? "items-end" : ""}`}>
+           <div key={message._id} className={`text-2xl flex ${message.sender == sender ? 'justify-end ' : 'justify-start'}`}>
+                <div>
+                    {message.sender != sender ? <UserAvatar img={userId?.avatar} /> : null }
+                </div>
+                <div className={`flex flex-col ${ message.sender === sender ? "items-end" : ""}`}>
                     <p className={`rounded-2xl p-1.5 w-fit ${message.sender == sender ? 'bg-blue-900 text-white' : 'bg-blue-200 text-blue-900'}`}>
                     {message.content}
                     </p>
                     <p className="text-slate-400 text-xs ">{message.timestamp}</p>
-                        </div>
-                    
-                
-                
-                    
-            
+                </div>
             </div>
           ))}
       </div>
       <div>
-      {chatData && chatData[0] && (
+      {chatData && (
          <Message sendMessage={handleSendMessage} />
         )}
       </div>
