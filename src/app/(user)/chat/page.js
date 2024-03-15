@@ -20,7 +20,7 @@ export default function ChatPage() {
     const [searchResults, setSearchResults] = useState([])
     const [selectedUser, setSelectedUser] = useState(null)
     const [auth, setAuth] = useState(null)
-    const [chat, setChat] = useState([])
+    const [chat, setChat] = useState('')
     const [messages, setMessages] = useState([])
 
     const router = useRouter()
@@ -63,7 +63,7 @@ export default function ChatPage() {
             }
         };
 
-    }, [])
+    }, [selectedUser])
 
 
     const handleSearchFromChat = async(searchTerm) => {
@@ -84,53 +84,37 @@ export default function ChatPage() {
 
     const handleUserSelect = async(clickedUser) => {
         setSelectedUser(clickedUser)
-        socket.current.off("new_message");
+        socket.current.off("new_message")
 
         const currentUserID = data._id
         
-        //console.log(auth)
         // fetch existing chat for the selected user
         try {
-            const existingChat = await getSelectedChat(clickedUser._id, auth)
-            //console.log(existingChat) //if I display this, give me the json chat
-            //console.log(existingChat) // if I display this, give me undifined
-            setChat(existingChat)
-
-            if(existingChat) {
-                try {
-                    const currentChat = existingChat[0]
-                    const chatId = currentChat._id
-                    const res = await getChatMessages(chatId, auth)
-
-                    setMessages(res)
-                    socket.current.on("new_message", (newMessage) => {
-                        // Check if the received message belongs to the current chat room
-                        if(newMessage.chat === chatId) {
-                            setMessages((prevMessages) => [...prevMessages, newMessage]);
-                        }
-                        
-                      });
+            // Fetch existing chat for the selected user
+            const existingChat = await getSelectedChat(clickedUser._id, auth);
+            setChat(existingChat);
             
+            // Fetch messages and subscribe to new messages if a chat exists
+            if (existingChat) {
+                const messages = await getChatMessages(existingChat, auth);
+                setMessages(messages);
+    
+                // Subscribe to new messages
+                socket.current.on("new_message", (newMessage) => {
+                    if (newMessage.chat === existingChat) {
+                        setMessages((prevMessages) => [...prevMessages, newMessage]);
+                    }
+                });
 
-                } catch (error) {
-                    console.error(error)
-                }
+            } else {
+                // If no chat exists, create a new chat
+                const createdChat = await createChat(currentUserID, clickedUser._id, auth);
+                setChat(createdChat);
             }
         } catch (error) {
-            console.error(error)
+            console.error("Error selecting user:", error);
         }
-
-        
-
-        // if chat dont exists 
-        if(!chat?.length) {
-            try {
-                await createChat(currentUserID, clickedUser)
     
-            } catch (error) {
-                console.error(error)
-            }
-        }
        
     }
 
