@@ -46,11 +46,11 @@ export default function ChatPage() {
         fetchData()
 
     
-        displayUsers(setSearchResults)
+        displayUsers(setSearchResults, token)
 
         if(!socket.current) {
             try {
-                socket.current = io("http://localhost:3000");
+                socket.current = io("https://chatty-api.fly.dev");
             } catch (error) {
                 console.error("Socket initialization error:", error);
             }
@@ -69,7 +69,7 @@ export default function ChatPage() {
     const handleSearchFromChat = async(searchTerm) => {
 
         try {
-            const res = await fetch(`http://localhost:3000/api/v0/user/search/username?searchTerm=${searchTerm}`)
+            const res = await fetch(`https://chatty-api.fly.dev/api/v0/user/search/username?searchTerm=${searchTerm}`)
 
             if(res.ok) {
                 const resOk = await res.json()
