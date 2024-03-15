@@ -14,6 +14,8 @@ export default function Home() {
     const token = localStorage.getItem('accessToken')
     if(token) {
       router.push('/chat')
+    } else {
+      router.push("/log-in")
     }
 
   })
@@ -21,12 +23,7 @@ export default function Home() {
 
   return (
     <div className="w-screen border-2 border-black">
-      <header>
-          <NoUserNav />
-      </header>
-      <main>
-      <h1>Hello World</h1>
-      </main>
+
     </div>
   );
 }
