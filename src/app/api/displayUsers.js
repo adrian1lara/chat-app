@@ -1,7 +1,11 @@
 
-export default async function displayUsers(setData) {
+export default async function displayUsers(setData, token) {
     try {
-        const res = await fetch("http://localhost:3000/api/v0/user/all")
+        const res = await fetch("https://chatty-api.fly.dev/api/v0/user/all", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
 
         if(res.ok) {
             const resOK = await res.json()
