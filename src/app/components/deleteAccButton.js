@@ -1,6 +1,6 @@
 import deleteUserAccount from "../api/userAuth/deleteAccount"
 
-export default function DeleteButton() {
+export default function DeleteButton({data}) {
 
     const handleDeleteUserAccount = async () => {
         const token  = localStorage.getItem('accessToken')
