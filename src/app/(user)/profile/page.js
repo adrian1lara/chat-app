@@ -54,7 +54,7 @@ export default function Page() {
                     <h3 className='text-2xl font-bold text-slate-500'>{data.username}</h3>
 
                     <div>
-                    <DeleteButton />
+                    <DeleteButton data={data}/>
                 </div>
                 </div>
                 
