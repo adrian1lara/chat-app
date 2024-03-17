@@ -3,6 +3,7 @@
 import { useState } from "react"
 import "../styles/global.css"
 import { useRouter } from "next/navigation"
+import getCurrentUser from "../api/userAuth/currentUser"
 
  export default function LogInForm () {
     const [email, setEmail] = useState('')
@@ -29,7 +30,17 @@ import { useRouter } from "next/navigation"
             if(res.ok) {
                 const response = await res.text()
                 localStorage.setItem('accessToken', response)
-                router.push("/chat")
+                
+                const user = await getCurrentUser(response)
+
+                if(user.role === 'admin') {
+                    router.push('/dashboard')
+                }
+
+                if(user.role === 'user') {
+                    router.push('/chat')
+                }
+
             } else {
                 const dataError = await res.text()
                 setError(dataError)
