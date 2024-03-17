@@ -9,17 +9,22 @@ import { useEffect, useState } from "react";
 import deleteUserAccount from '@/app/api/userAuth/deleteAccount';
 import ProfileAvatar from '@/app/components/profileAvatar';
 import DeleteButton from '@/app/components/deleteAccButton';
+import Modal from '@/app/components/modal';
+import { avatars } from '@/app/assets/avatars';
+import updateAvatar from '@/app/api/updateAvatar';
 
 
 
 export default function Page() {
     const [data, setData] = useState('')
     const [error, setError] = useState(null)
+    const [auth, setAuth] = useState('')
     const router = useRouter();
 
     useEffect(()=> {
 
         const token = localStorage.getItem('accessToken')
+        setAuth(token)
 
         validateUser(router)
         
@@ -37,6 +42,9 @@ export default function Page() {
 
     }, [])
 
+    const handleSelectAvatar = async (avatar) => {
+        await updateAvatar(auth, avatar)
+    }
    
     
     if(!data) return <h1>Loading...</h1>
@@ -49,18 +57,15 @@ export default function Page() {
                 <UserNav data={data}/>
             </header>
             <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-2'>
-                <div className=' flex flex-col items-center justify-center'>   
-                    <ProfileAvatar img={data.avatar}/> 
-                    <h3 className='text-2xl font-bold text-slate-500'>{data.username}</h3>
-
-                    <div>
-                    <DeleteButton data={data}/>
+                    <div className=' flex flex-col items-center justify-center'>   
+                        <ProfileAvatar img={data.avatar}/> 
+                            <h3 className='text-2xl font-bold text-slate-500'>{data.username}</h3>
+                        <div>
+                        <DeleteButton data={data}/>
+                    </div>
                 </div>
-                </div>
-                
+                <Modal avatar={avatars} handleUpdateAvatar={handleSelectAvatar}/>
             </div>
-
-            
         </div>
         
        
