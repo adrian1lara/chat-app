@@ -107,9 +107,9 @@ export default function ChatPage() {
                 });
 
             } else {
+                setMessages([])
                 // If no chat exists, create a new chat
                 const createdChat = await createChat(currentUserID, clickedUser._id, auth);
-                setChat(createdChat);
             }
         } catch (error) {
             console.error("Error selecting user:", error);
