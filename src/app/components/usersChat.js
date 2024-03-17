@@ -7,7 +7,7 @@ export default function UserDisplay({usernames, onUserSelect}) {
     const [selectedUser, setSelectedUser] = useState(null);
 
   const handleClick = (userId) => {
-    setSelectedUser(userId === selectedUser ? null : userId);
+    setSelectedUser(userId);
   };
 
 
