@@ -1,9 +1,12 @@
+import getApiUrl from "@/app/utility/getApiUrl"
 
 
-export default async function getCurrentUser(token) {
+
+export default async function getCurrentUser(token) {   
+    const API_URL = getApiUrl()
 
     try {
-        const res = await fetch("https://chatty-api.fly.dev/api/v0/user/auth/me", {
+        const res = await fetch(`${API_URL}/api/v0/user/auth/me`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

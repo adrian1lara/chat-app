@@ -4,6 +4,7 @@ import { useState } from "react"
 import "../styles/global.css"
 import { useRouter } from "next/navigation"
 import getCurrentUser from "../api/userAuth/currentUser"
+import getApiUrl from "../utility/getApiUrl"
 
  export default function LogInForm () {
     const [email, setEmail] = useState('')
@@ -12,11 +13,13 @@ import getCurrentUser from "../api/userAuth/currentUser"
     const router = useRouter()
 
     const handleLogIn = async(e) => {
+        const API_URL = getApiUrl()
+
         e.preventDefault()
 
        try {
 
-            const res = await fetch("https://chatty-api.fly.dev/api/v0/user/auth/login",  {
+            const res = await fetch(`${API_URL}/api/v0/user/auth/login`,  {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

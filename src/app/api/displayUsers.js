@@ -1,7 +1,12 @@
+import getConfig from "next/config"
+import getApiUrl from "../utility/getApiUrl"
 
 export default async function displayUsers(setData, token) {
+    const API_URL = getApiUrl()
+
     try {
-        const res = await fetch("https://chatty-api.fly.dev/api/v0/user/all", {
+        const res = await fetch(`${API_URL}/api/v0/user/all`, {
+            method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
             }
