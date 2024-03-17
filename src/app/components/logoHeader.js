@@ -3,7 +3,7 @@ import { LuMessagesSquare } from "react-icons/lu"
 
 export default function Logo({fontSize}) {
     return (
-        <div className={`${fontSize} flex items-center space-x-2 text-blue-700 font-bold text-center`}> 
+        <div className={`${fontSize} flex items-center space-x-2 text-blue-700 font-bold `}> 
             <LuMessagesSquare />
 
             <h1>
