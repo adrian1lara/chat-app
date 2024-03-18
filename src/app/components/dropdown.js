@@ -27,6 +27,9 @@ export default function Dropdown({ data }) {
                     <div className="flex block rounded-md px-4 py-2 text-sm text-gray-700 items-center hover:bg-gray-100 active:bg-blue-100 cursor-pointer" role="menuitem">
                       <a href="/profile" className="mr-2">{data.username}</a><UserAvatar img={data.avatar} />
                     </div>
+                    <div className={`${data.role === "admin" ? "flex" : "hidden"} block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer`}>
+                        <a href="/dashboard">Dashboard</a>
+                    </div>
                     <LogOutBtn />
                 </div>
             </div>
