@@ -110,6 +110,22 @@ export default function ChatPage() {
                 setMessages([])
                 // If no chat exists, create a new chat
                 const createdChat = await createChat(currentUserID, clickedUser._id, auth);
+                setChat(createdChat)
+
+                const existingChatYes = await getSelectedChat(clickedUser._id, auth);
+
+                if (existingChatYes) {
+
+                    const messages = await getChatMessages(createdChat, auth);
+                    setMessages(messages);
+        
+                    // Subscribe to new messages
+                    socket.current.on("new_message", (newMessage) => {
+                        if (newMessage.chat === existingChatYes) {
+                            setMessages((prevMessages) => [...prevMessages, newMessage]);
+                        }
+                    });
+                }
             }
         } catch (error) {
             console.error("Error selecting user:", error);
