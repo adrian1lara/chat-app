@@ -11,14 +11,13 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
   
    useEffect(() => {
       // Scroll to the bottom only when messages change or chat changes
-      if (messageContainerRef.current && (messages.length > 0 || currentChatId !== chatData)) {
+      if (messageContainerRef.current && (messages?.length > 0 || currentChatId !== chatData)) {
         messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
         setCurrentChatId(chatData); // Update current chat ID
       }
     }, [messages, chatData]);
 
     const handleSendMessage = async(message)=> {
-        
         const chatId = chatData
         console.log(chatData) 
 
@@ -36,7 +35,7 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
       <div className="flex flex-col h-full text-white space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       ref={messageContainerRef} >
         {chatData == currentChatId &&
-          messages.map((message) => (
+          messages?.map((message) => (
             
            <div key={message._id} className={`text-2xl flex ${message.sender == sender ? 'justify-end ' : 'justify-start'}`}>
                 <div>
