@@ -41,9 +41,11 @@ export default function UserChat ({ messages, userId, token, chatData , sender})
                 <div>
                     {message.sender != sender ? <UserAvatar img={userId?.avatar} /> : null }
                 </div>
-                <div className={`flex flex-col ${ message.sender === sender ? "items-end" : ""}`}>
-                    <p className={`rounded-2xl p-1.5 w-fit ${message.sender == sender ? 'bg-blue-900 text-white' : 'bg-blue-200 text-blue-900'}`}>
-                    {message.content}
+                <div className={`flex flex-col max-w-40 md:text-md md:text-sm sm:text-xs ${ message.sender === sender ? "items-end" : ""}`}>
+                    <p className={`rounded-2xl p-1.5 w-fit ${message.sender == sender ? 'bg-blue-900 text-white w-fit' : 'bg-blue-200 text-blue-900'}`}>
+                    {message.content.split(/(.{30})/).map((line, index) => (
+                        <span key={index}>{line !== undefined && line !== '' ? line + '\n' : ''}</span>
+                    ))}
                     </p>
                     <p className="text-slate-400 text-xs ">{message.timestamp}</p>
                 </div>
