@@ -15,6 +15,8 @@ export default function Home() {
 
     if(!token) {
       router.push("/log-in")
+    } else {
+      router.push("/chat")
     }
 
   }, [])
