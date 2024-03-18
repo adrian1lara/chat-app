@@ -14,31 +14,8 @@ export default function Home() {
     const token = localStorage.getItem('accessToken')
 
     if(!token) {
-      router.push('/log-in')
+      router.push("/log-in")
     }
-    
-    const fetchData = async () => {
-      try {
-      
-        const data = await getCurrentUser(token)
-    
-        if(data.role === 'admin') {
-          router.push('/dashboard')
-        }
-    
-        if(data.role === 'user') {
-          router.push('/chat')
-        }
-
-        } catch (error) {
-          console.error(error)
-        }
-    }
-
-    fetchData()
-    
-   
-
 
   }, [])
   
