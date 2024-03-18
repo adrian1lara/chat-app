@@ -25,7 +25,7 @@ export default function Dropdown({ data }) {
             <div id="dropdown-menu" className={` origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 ${transClass} `}>
                 <div className="py-2 p-2" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-button">
                     <div className="flex block rounded-md px-4 py-2 text-sm text-gray-700 items-center hover:bg-gray-100 active:bg-blue-100 cursor-pointer" role="menuitem">
-                      <a href="/profile">profile</a><UserAvatar img={data.avatar} />
+                      <a href="/profile" className="mr-2">{data.username}</a><UserAvatar img={data.avatar} />
                     </div>
                     <LogOutBtn />
                 </div>
