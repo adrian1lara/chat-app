@@ -58,13 +58,17 @@ export default function Page() {
             </header>
             <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 border-2'>
                     <div className=' flex flex-col items-center justify-center'>   
+                    <div className='flex'>
                         <ProfileAvatar img={data.avatar}/> 
+                        <Modal avatar={avatars} handleUpdateAvatar={handleSelectAvatar}/>
+                    </div>
+                        
                             <h3 className='text-2xl font-bold text-slate-500'>{data.username}</h3>
                         <div>
                         <DeleteButton data={data}/>
                     </div>
                 </div>
-                <Modal avatar={avatars} handleUpdateAvatar={handleSelectAvatar}/>
+               
             </div>
         </div>
         
