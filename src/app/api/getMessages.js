@@ -1,7 +1,11 @@
+import getApiUrl from "../utility/getApiUrl"
+
 
 export default async function getChatMessages (chatId, token) {
+    const API_URL = getApiUrl()
+
     try {
-        const res = await fetch(`https://chatty-api.fly.dev/api/v0/message/${chatId}/messages`, {
+        const res = await fetch(`${API_URL}/api/v0/message/${chatId}/messages`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`

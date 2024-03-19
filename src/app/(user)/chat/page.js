@@ -14,6 +14,7 @@ import getSelectedChat from "@/app/api/getChat";
 import getChatMessages from "@/app/api/getMessages";
 import { io } from "socket.io-client";
 import Footer from "@/app/components/footer";
+import getApiUrl from "@/app/utility/getApiUrl";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -48,9 +49,11 @@ export default function ChatPage() {
     
         displayUsers(setSearchResults, token)
 
+        const API_URL = getApiUrl()
+
         if(!socket.current) {
             try {
-                socket.current = io("https://chatty-api.fly.dev");
+                socket.current = io(`${API_URL}`);
             } catch (error) {
                 console.error("Socket initialization error:", error);
             }
@@ -68,8 +71,9 @@ export default function ChatPage() {
 
     const handleSearchFromChat = async(searchTerm) => {
 
+        const API_URL = getApiUrl()
         try {
-            const res = await fetch(`https://chatty-api.fly.dev/api/v0/user/search/username?searchTerm=${searchTerm}`)
+            const res = await fetch(`${API_URL}/api/v0/user/search/username?searchTerm=${searchTerm}`)
 
             if(res.ok) {
                 const resOk = await res.json()

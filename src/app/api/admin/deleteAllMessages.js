@@ -1,7 +1,10 @@
+import getApiUrl from "@/app/utility/getApiUrl"
 
 export default async function deleteAllMessages(token) {
+
+    const API_URL = getApiUrl()
     try {
-        const res = await fetch('https://chatty-api.fly.dev/api/v0/message/delete/all', {
+        const res = await fetch(`${API_URL}/api/v0/message/delete/all`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`

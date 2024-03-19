@@ -1,7 +1,10 @@
+import getApiUrl from "../utility/getApiUrl"
+
 
 export default async function sendMessage (chatId, token, message) {
+    const API_URL = getApiUrl()
     try {
-        const res = await fetch(`https://chatty-api.fly.dev/api/v0/message/${chatId}/new`, {
+        const res = await fetch(`${API_URL}/api/v0/message/${chatId}/new`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

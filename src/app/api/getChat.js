@@ -1,7 +1,9 @@
+import getApiUrl from "../utility/getApiUrl"
 
 export default async function getSelectedChat(clickedUserID, token) {
+    const API_URL = getApiUrl()
     try {
-        const res = await fetch(`https://chatty-api.fly.dev/api/v0/chat/user?userId=${clickedUserID}`, {
+        const res = await fetch(`${API_URL}/api/v0/chat/user?userId=${clickedUserID}`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`
