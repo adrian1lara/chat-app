@@ -1,9 +1,9 @@
 
 
-export const validateUser = (router) => {
+export const validateUser = (router, valid) => {
     const token = localStorage.getItem('accessToken')
 
-    if(!token) {
+    if(!token || valid) {
         router.push("/")
     }
 
