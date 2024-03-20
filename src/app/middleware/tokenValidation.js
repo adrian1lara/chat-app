@@ -1,8 +1,8 @@
-import { jwtDecode } from "jwt-decode";
 
 export default function tokenValid(token) {
-    const decode = jwtDecode(token)
     const now = Date.now() / 1000;
-    const expiry = decode.iat + decode.exp
+
+    const expiry = token.exp
+
     return now < expiry 
 }
