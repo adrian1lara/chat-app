@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import getCurrentUser from "./api/userAuth/currentUser";
 import { data } from "autoprefixer";
+import tokenValid from "./middleware/tokenValidation";
 
 export default function Home() {
   const router = useRouter()
@@ -12,8 +13,9 @@ export default function Home() {
 
   useEffect(()=> {
     const token = localStorage.getItem('accessToken')
+    const decodetoken = tokenValid(token)
 
-    if(!token) {
+    if(!token || decodetoken) {
       router.push("/log-in")
     } else {
       router.push("/chat")
