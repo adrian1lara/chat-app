@@ -15,6 +15,7 @@ import getChatMessages from "@/app/api/getMessages";
 import { io } from "socket.io-client";
 import Footer from "@/app/components/footer";
 import getApiUrl from "@/app/utility/getApiUrl";
+import tokenValid from "@/app/middleware/tokenValidation";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -31,9 +32,13 @@ export default function ChatPage() {
     useEffect(() => {
 
         const token = localStorage.getItem('accessToken')
+        const decodetoken = tokenValid(token)
+
         setAuth(token)
-        validateUser(router)
         
+        validateUser(router, decodetoken)
+       
+
         const  fetchData = async () => {
             try {
                 const res = await getCurrentUser(token)
