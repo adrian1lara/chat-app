@@ -16,6 +16,7 @@ import { io } from "socket.io-client";
 import Footer from "@/app/components/footer";
 import getApiUrl from "@/app/utility/getApiUrl";
 import tokenValid from "@/app/middleware/tokenValidation";
+import { jwtDecode } from "jwt-decode";
 
 export default function ChatPage() {
     const [data, setData] = useState('')
@@ -32,11 +33,36 @@ export default function ChatPage() {
     useEffect(() => {
 
         const token = localStorage.getItem('accessToken')
-        const decodetoken = tokenValid(token)
 
-        setAuth(token)
+        if (!token || typeof token !== 'string' || token.trim() === '') {
+            // Redirect to login if token is not valid
+            router.push("/log-in");
+        }
+    
+        try {
+            // Attempt to decode the token
+            const decodedToken = jwtDecode(token);
+
+            // Validate the decoded token
+            const valid = tokenValid(decodedToken);
+
+            // If token is not valid, redirect to login
+            if (!valid) {
+                
+                router.push("/log-in");
+                return
+            }
+
+
+            setAuth(token)
+
+        } catch (error) {
+            // If there's an error decoding the token, redirect to login
+            console.error("Error decoding token:", error);
+            router.push("/log-in");
+        }
         
-        validateUser(router, decodetoken)
+        validateUser(router)
        
 
         const  fetchData = async () => {
