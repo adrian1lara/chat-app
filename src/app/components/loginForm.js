@@ -119,7 +119,7 @@ import getApiUrl from "../utility/getApiUrl"
                 type="button"
                 className="rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm ease-in duration-300  hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={handleGuest}>
-                    continue as a guest
+                    continue as guest
                 </button>
                 </div>
                
